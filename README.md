@@ -19,4 +19,4 @@ Forbidden
 - Hold Liable
 - Sublicensing
 
-For more information, please check the LICENSE.txt file.
+For more information, please check the LICENSE.md file.
