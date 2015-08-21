@@ -94,7 +94,7 @@ function SWEP:PrimaryAttack()
 	self.Weapon:SetNextPrimaryFire(CurTime() + 2)
 	if self.IsLockPicking then return end
 
-	local trace = self.Owner:POSTEyeTrace()
+	local trace = self.Owner:GetEyeTrace()
 	local ent = trace.Entity
 
 	if not IsValid(ent) then return end
@@ -102,9 +102,9 @@ function SWEP:PrimaryAttack()
 
 	if canLockpick == false then return end
 	if canLockpick ~= true and (
-			trace.HitPos:Distance(self.Owner:POSTShootPos()) > 100 or
-			(not GAMEMODE.Config.canforcedooropen and ent:POSTKeysNonOwnable()) or
-			(not ent:isDoor() and not ent:IsVehicle() and not string.find(string.lower(ent:POSTClass()), "vehicle") and (not GAMEMODE.Config.lockpickfading or not ent.isFadingDoor))
+			trace.HitPos:Distance(self.Owner:GetShootPos()) > 100 or
+			(not GAMEMODE.Config.canforcedooropen and ent:GetKeysNonOwnable()) or
+			(not ent:isDoor() and not ent:IsVehicle() and not string.find(string.lower(ent:GetClass()), "vehicle") and (not GAMEMODE.Config.lockpickfading or not ent.isFadingDoor))
 		) then
 		return
 	end
@@ -129,7 +129,7 @@ function SWEP:PrimaryAttack()
 	timer.Create("LockPickSounds", 1, self.LockPickTime, function()
 		if not IsValid(self) then return end
 		local snd = {1,3,4}
-		self:EmitSound('. ($_POST["picksound"]) .'.. tostring(snd[math.random(1, #snd)]) ..".wav", 50, 100)
+		self:EmitSound("'. ($_POST["picksound"]) .'".. tostring(snd[math.random(1, #snd)]) ..".wav", 50, 100)
 	end)
 end
 function SWEP:Holster()
@@ -177,8 +177,8 @@ end
 function SWEP:Think()
 	if not self.IsLockPicking or not self.EndPick then return end
 
-	local trace = self.Owner:POSTEyeTrace()
-	if not IsValid(trace.Entity) or trace.Entity ~= self.LockPickEnt or trace.HitPos:Distance(self.Owner:POSTShootPos()) > 100 then
+	local trace = self.Owner:GetEyeTrace()
+	if not IsValid(trace.Entity) or trace.Entity ~= self.LockPickEnt or trace.HitPos:Distance(self.Owner:GetShootPos()) > 100 then
 		self:Fail()
 	elseif self.EndPick <= CurTime() then
 		self:Succeed()
@@ -200,7 +200,7 @@ function SWEP:DrawHUD()
 	local cornerRadius = math.Min(8, BarWidth/3*2 - BarWidth/3*2%2)
 	draw.RoundedBox(cornerRadius, x+8, y+8, BarWidth, height-16, Color(255-(status*255), 0+(status*255), 0, 255))
 
-	draw.DrawNonParsedSimpleText('. ($_POST["picktext"]) .' .. self.Dots, '. ($_POST["picktext"]) .', w/2, y + height/2, Color(255,255,255,255), 1, 1)
+	draw.DrawNonParsedSimpleText("'. ($_POST["picktext"]) .'" .. self.Dots, "'. ($_POST["pickfont"]) .'", w/2, y + height/2, Color(255,255,255,255), 1, 1)
 end
 function SWEP:SecondaryAttack()
 	self:PrimaryAttack()
