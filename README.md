@@ -1,6 +1,4 @@
-[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
-
-[![Build Status](https://travis-ci.org/ConnorMcF/DarkRP-Lockpick-Maker.svg?branch=master)](https://travis-ci.org/ConnorMcF/DarkRP-Lockpick-Maker)
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/) [![Build Status](https://travis-ci.org/ConnorMcF/DarkRP-Lockpick-Maker.svg?branch=master)](https://travis-ci.org/ConnorMcF/DarkRP-Lockpick-Maker)
 
 # DarkRP Lockpick Maker
 Make lockpicks and stuff!
